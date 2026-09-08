@@ -73,11 +73,7 @@ function isActive(to) {
     <!-- Brand -->
     <div class="sidebar-brand">
       <div class="brand-icon">
-        <Target :size="20" />
-      </div>
-      <div v-if="!collapsed" class="brand-text">
-        <p class="brand-title">ENERGEEK</p>
-        <p class="brand-subtitle">Manajemen Aset Kantor</p>
+        <img src="@/assets/logo.png" alt="Logo" class="w-6 h-6" />
       </div>
     </div>
 
@@ -132,7 +128,7 @@ function isActive(to) {
   flex-direction: column;
   width: 256px;
   background-color: var(--color-sidebar-bg);
-  color: #cbd5e1;
+  color: #f2f5f8;
   transition: width 0.2s ease-in-out;
 }
 
@@ -144,23 +140,17 @@ function isActive(to) {
 .sidebar-brand {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   height: 64px;
-  padding: 0 16px;
+  width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   flex-shrink: 0;
 }
 
-.brand-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background-color: var(--color-accent-soft);
-  color: var(--color-accent);
+.brand-icon img {
+  width: 130px;
+  height: 32px;
 }
 
 .brand-text {
@@ -181,7 +171,7 @@ function isActive(to) {
 .brand-subtitle {
   margin: 2px 0 0;
   font-size: 12px;
-  color: var(--color-text-subtle);
+  color: var(--color-sidebar-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -201,9 +191,6 @@ function isActive(to) {
   margin-bottom: 0;
 }
 
-/* Button ghost dari shadcn didesain untuk tema terang, jadi warna & hover
-   di sidebar gelap ini di-override manual (perlu !important karena
-   class Tailwind bawaan Button ikut ter-attach di elemen yang sama). */
 .nav-group-toggle {
   display: flex !important;
   align-items: center;
@@ -213,7 +200,7 @@ function isActive(to) {
   height: auto !important;
   font-size: 12px !important;
   font-weight: 500 !important;
-  color: var(--color-text-muted) !important;
+  color: var(--color-sidebar-muted) !important;
 }
 
 .nav-group-toggle:hover {
@@ -264,7 +251,7 @@ function isActive(to) {
   padding: 8px 10px !important;
   font-size: 14px !important;
   font-weight: 400 !important;
-  color: #cbd5e1 !important;
+  color: #ffffff !important;
   text-decoration: none;
 }
 
@@ -297,7 +284,7 @@ function isActive(to) {
 
 .nav-icon {
   flex-shrink: 0;
-  color: var(--color-text-subtle);
+  color: var(--color-sidebar-muted);
   transition: color 0.15s ease;
 }
 
@@ -322,7 +309,7 @@ function isActive(to) {
   padding: 8px 10px !important;
   font-size: 14px !important;
   font-weight: 400 !important;
-  color: var(--color-text-subtle) !important;
+  color: var(--color-sidebar-muted) !important;
 }
 
 .collapse-btn:hover {

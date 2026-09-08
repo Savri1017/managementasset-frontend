@@ -158,19 +158,6 @@ async function handleLogin() {
               </div>
             </div>
 
-            <!-- Remember -->
-            <div class="form-options">
-              <label class="remember-me">
-                <input type="checkbox" />
-                <span class="custom-checkbox"></span>
-                <span>Ingat saya</span>
-              </label>
-
-              <button type="button" class="forgot-button">
-                Lupa kata sandi?
-              </button>
-            </div>
-
             <!-- Submit -->
             <button
               type="submit"
@@ -178,7 +165,7 @@ async function handleLogin() {
               :disabled="isLoading"
             >
               <span>
-                {{ isLoading ? 'Memproses...' : 'Masuk ke Dashboard' }}
+                {{ isLoading ? 'Memproses...' : 'Masuk' }}
               </span>
 
               <ArrowRight
@@ -219,15 +206,15 @@ async function handleLogin() {
   background:
     radial-gradient(
       circle at top left,
-      rgba(59, 130, 246, 0.12),
+      rgba(226, 77, 61, 0.12),
       transparent 34%
     ),
     radial-gradient(
       circle at bottom right,
-      rgba(37, 99, 235, 0.1),
+      rgba(209, 22, 11, 0.1),
       transparent 32%
     ),
-    #f8fbff;
+    #fff9f8;
 }
 
 .login-container {
@@ -239,10 +226,10 @@ async function handleLogin() {
   min-height: 680px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(219, 234, 254, 0.95);
+  border: 1px solid rgba(253, 225, 220, 0.95);
   border-radius: 28px;
   box-shadow:
-    0 25px 70px rgba(30, 64, 175, 0.12),
+    0 25px 70px rgba(150, 3, 0, 0.12),
     0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
@@ -262,7 +249,7 @@ async function handleLogin() {
   height: 320px;
   top: -100px;
   right: -90px;
-  background: rgba(96, 165, 250, 0.14);
+  background: rgba(239, 125, 108, 0.14);
 }
 
 .background-shape--two {
@@ -270,7 +257,7 @@ async function handleLogin() {
   height: 240px;
   bottom: -80px;
   left: -70px;
-  background: rgba(37, 99, 235, 0.09);
+  background: rgba(209, 22, 11, 0.09);
 }
 
 /* =========================================================
@@ -286,9 +273,9 @@ async function handleLogin() {
   background:
     linear-gradient(
       145deg,
-      #2563eb 0%,
-      #3b82f6 45%,
-      #60a5fa 100%
+      #d1160b 0%,
+      #e24d3d 45%,
+      #ef7d6c 100%
     );
   color: #ffffff;
 }
@@ -331,7 +318,7 @@ async function handleLogin() {
 
 .brand-title span {
   display: block;
-  color: #dbeafe;
+  color: #fde1dc;
 }
 
 .brand-description {
@@ -413,7 +400,7 @@ async function handleLogin() {
 
 .eyebrow {
   margin: 0 0 8px;
-  color: #2563eb;
+  color: #d1160b;
   font-size: 13px;
   font-weight: 700;
 }
@@ -481,10 +468,10 @@ async function handleLogin() {
   width: 100%;
   height: 50px;
   padding: 0 46px;
-  border: 1px solid #dbeafe;
+  border: 1px solid #fde1dc;
   border-radius: 12px;
   outline: none;
-  background: #f8fbff;
+  background: #fff9f8;
   color: #0f172a;
   font-size: 14px;
   transition:
@@ -498,17 +485,17 @@ async function handleLogin() {
 }
 
 .input-wrapper input:hover {
-  border-color: #bfdbfe;
+  border-color: #fccbc3;
 }
 
 .input-wrapper input:focus {
-  border-color: #60a5fa;
+  border-color: #ef7d6c;
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+  box-shadow: 0 0 0 4px rgba(226, 77, 61, 0.12);
 }
 
 .input-wrapper:focus-within .input-icon {
-  color: #2563eb;
+  color: #d1160b;
 }
 
 .password-toggle {
@@ -532,8 +519,8 @@ async function handleLogin() {
 }
 
 .password-toggle:hover {
-  color: #2563eb;
-  background: #eff6ff;
+  color: #d1160b;
+  background: #fff2f0;
 }
 
 .form-options {
@@ -563,7 +550,7 @@ async function handleLogin() {
 .custom-checkbox {
   width: 16px;
   height: 16px;
-  border: 1px solid #bfdbfe;
+  border: 1px solid #fccbc3;
   border-radius: 5px;
   background: #ffffff;
   transition:
@@ -573,8 +560,8 @@ async function handleLogin() {
 }
 
 .remember-me input:checked + .custom-checkbox {
-  border-color: #2563eb;
-  background: #2563eb;
+  border-color: #d1160b;
+  background: #d1160b;
   box-shadow: inset 0 0 0 3px #ffffff;
 }
 
@@ -582,13 +569,13 @@ async function handleLogin() {
   padding: 0;
   border: 0;
   background: transparent;
-  color: #2563eb;
+  color: #d1160b;
   font-size: 12px;
   font-weight: 650;
 }
 
 .forgot-button:hover {
-  color: #1d4ed8;
+  color: #b60400;
   text-decoration: underline;
 }
 
@@ -610,27 +597,18 @@ async function handleLogin() {
   background:
     linear-gradient(
       135deg,
-      #2563eb 0%,
-      #3b82f6 100%
+      #d1160b 0%,
+      #e24d3d 100%
     );
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
-  box-shadow:
-    0 12px 24px rgba(37, 99, 235, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
+ 
 }
 
 .login-button:hover:not(:disabled) {
   transform: translateY(-1px);
   filter: brightness(1.04);
-  box-shadow:
-    0 16px 30px rgba(37, 99, 235, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .login-button:active:not(:disabled) {

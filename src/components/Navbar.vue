@@ -1,6 +1,19 @@
 <script setup>
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Menu, Search, Bell, ChevronDown, User, Settings, LogOut } from 'lucide-vue-next'
 
 defineProps({
@@ -18,22 +31,14 @@ const notifications = ref([
   { id: 2, text: 'Pengajuan peminjaman proyektor menunggu persetujuan', time: '1 jam lalu' },
   { id: 3, text: '3 aset belum dikembalikan sesuai jadwal', time: 'Hari ini' },
 ])
-
-const showNotifications = ref(false)
-const showProfileMenu = ref(false)
-
-function closeMenus() {
-  showNotifications.value = false
-  showProfileMenu.value = false
-}
 </script>
 
 <template>
-  <header class="navbar" @click="closeMenus">
+  <header class="navbar">
     <!-- Sidebar toggle -->
-    <button type="button" class="icon-btn" @click.stop="emit('toggle-sidebar')">
+    <Button variant="ghost" size="icon" class="icon-btn" @click="emit('toggle-sidebar')">
       <Menu :size="20" />
-    </button>
+    </Button>
 
     <!-- Judul halaman -->
     <div class="page-heading">
@@ -45,66 +50,74 @@ function closeMenus() {
     <div class="search-wrap">
       <div class="search-box">
         <Search class="search-icon" :size="16" />
-        <input type="text" placeholder="Cari aset, kode, atau lokasi..." class="search-input" />
+        <Input type="text" placeholder="Cari aset, kode, atau lokasi..." class="search-input" />
       </div>
     </div>
 
     <div class="navbar-actions">
       <!-- Notifikasi -->
-      <div class="dropdown">
-        <button
-          type="button"
-          class="icon-btn"
-          @click.stop="showNotifications = !showNotifications; showProfileMenu = false"
-        >
-          <Bell :size="20" />
-          <span v-if="notifications.length" class="badge-dot" />
-        </button>
-
-        <div v-if="showNotifications" class="dropdown-panel" @click.stop>
-          <div class="dropdown-header">
-            <p>Notifikasi</p>
-          </div>
-          <ul class="notification-list">
-            <li v-for="n in notifications" :key="n.id" class="notification-item">
+      <DropdownMenu>
+        <DropdownMenuTrigger as-child>
+          <Button variant="ghost" size="icon" class="icon-btn">
+            <Bell :size="20" />
+            <Badge v-if="notifications.length" class="badge-dot" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" class="dropdown-panel notification-panel">
+          <DropdownMenuLabel>Notifikasi</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            v-for="n in notifications"
+            :key="n.id"
+            class="notification-item"
+          >
+            <div>
               <p class="notification-text">{{ n.text }}</p>
               <p class="notification-time">{{ n.time }}</p>
-            </li>
-          </ul>
-          <div class="dropdown-footer">
-            <router-link to="/notifications" class="link-muted">Lihat semua notifikasi</router-link>
-          </div>
-        </div>
-      </div>
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem as-child class="dropdown-footer-link">
+            <router-link to="/notifications">Lihat semua notifikasi</router-link>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <Separator orientation="vertical" class="navbar-separator" />
 
       <!-- Profil -->
-      <div class="dropdown">
-        <button
-          type="button"
-          class="profile-btn"
-          @click.stop="showProfileMenu = !showProfileMenu; showNotifications = false"
-        >
-          <div class="avatar">A</div>
-          <span class="profile-name">Admin</span>
-          <ChevronDown class="chevron-icon" :size="16" />
-        </button>
-
-        <div v-if="showProfileMenu" class="dropdown-panel profile-panel" @click.stop>
-          <div class="profile-info">
+      <DropdownMenu>
+        <DropdownMenuTrigger as-child>
+          <Button variant="ghost" class="profile-btn">
+            <Avatar class="avatar">
+              <AvatarFallback>A</AvatarFallback>
+            </Avatar>
+            <span class="profile-name">Admin</span>
+            <ChevronDown class="chevron-icon" :size="16" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" class="dropdown-panel">
+          <DropdownMenuLabel>
             <p class="profile-info-name">Admin Aset</p>
             <p class="profile-info-email">admin@kantor.co.id</p>
-          </div>
-          <router-link to="/profile" class="menu-item">
-            <User :size="16" /> Profil Saya
-          </router-link>
-          <router-link to="/settings" class="menu-item">
-            <Settings :size="16" /> Pengaturan
-          </router-link>
-          <button type="button" class="menu-item menu-item--danger" @click="emit('logout')">
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem as-child>
+            <router-link to="/profile" class="menu-item">
+              <User :size="16" /> Profil Saya
+            </router-link>
+          </DropdownMenuItem>
+          <DropdownMenuItem as-child>
+            <router-link to="/settings" class="menu-item">
+              <Settings :size="16" /> Pengaturan
+            </router-link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem class="menu-item menu-item--danger" @click="emit('logout')">
             <LogOut :size="16" /> Keluar
-          </button>
-        </div>
-      </div>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   </header>
 </template>
@@ -123,25 +136,12 @@ function closeMenus() {
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Button ghost/icon dari shadcn sudah pas untuk tombol ikon di navbar terang,
+   jadi override di sini cuma sedikit penyesuaian warna. */
 .icon-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-text-muted);
-  transition: background-color 0.15s ease, color 0.15s ease;
-}
-
-.icon-btn:hover {
-  background-color: #f1f5f9;
-  color: var(--color-text);
+  color: var(--color-text-muted) !important;
 }
 
 .page-heading {
@@ -199,27 +199,12 @@ function closeMenus() {
   transform: translateY(-50%);
   color: var(--color-text-subtle);
   pointer-events: none;
+  z-index: 1;
 }
 
 .search-input {
-  width: 100%;
-  padding: 8px 12px 8px 36px;
-  border-radius: 6px;
-  border: 1px solid var(--color-border);
+  padding-left: 36px;
   background-color: var(--color-bg);
-  font-size: 14px;
-  color: #334155;
-}
-
-.search-input::placeholder {
-  color: var(--color-text-subtle);
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: var(--color-accent);
-  background-color: var(--color-surface);
-  box-shadow: 0 0 0 3px var(--color-accent-soft);
 }
 
 /* Actions */
@@ -227,68 +212,38 @@ function closeMenus() {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
-.dropdown {
-  position: relative;
+.navbar-separator {
+  height: 24px;
 }
 
 .badge-dot {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 4px;
+  right: 4px;
   width: 8px;
   height: 8px;
+  min-width: 0;
+  padding: 0;
   border-radius: 50%;
-  background-color: var(--color-danger);
+  background-color: var(--color-danger) !important;
   box-shadow: 0 0 0 2px var(--color-surface);
 }
 
+/* Dropdown panels */
 .dropdown-panel {
-  position: absolute;
-  right: 0;
-  margin-top: 8px;
-  width: 320px;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface);
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
-  overflow: hidden;
+  width: 288px;
 }
 
-.dropdown-header {
-  padding: 12px 16px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.dropdown-header p {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text);
-}
-
-.notification-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-height: 280px;
-  overflow-y: auto;
+.notification-panel {
+  padding: 4px 0;
 }
 
 .notification-item {
-  padding: 12px 16px;
-  border-bottom: 1px solid #f8fafc;
+  padding: 10px 12px !important;
   cursor: pointer;
-}
-
-.notification-item:hover {
-  background-color: #f8fafc;
-}
-
-.notification-item:last-child {
-  border-bottom: none;
 }
 
 .notification-text {
@@ -303,46 +258,26 @@ function closeMenus() {
   color: var(--color-text-subtle);
 }
 
-.dropdown-footer {
-  padding: 8px 16px;
-  text-align: center;
-}
-
-.link-muted {
-  font-size: 12px;
+.dropdown-footer-link {
+  justify-content: center !important;
+  font-size: 12px !important;
   font-weight: 500;
-  color: #0d9488;
-  text-decoration: none;
-}
-
-.link-muted:hover {
-  text-decoration: underline;
+  color: #0d9488 !important;
 }
 
 /* Profile */
 .profile-btn {
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 8px;
-  padding: 6px 8px 6px 6px;
-  border-radius: 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.profile-btn:hover {
-  background-color: #f1f5f9;
+  padding: 6px 8px 6px 6px !important;
+  height: auto !important;
 }
 
 .avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  flex-shrink: 0;
   background-color: var(--color-accent);
   color: #ffffff;
   font-size: 14px;
@@ -367,16 +302,6 @@ function closeMenus() {
   }
 }
 
-.profile-panel {
-  width: 208px;
-  padding: 4px 0;
-}
-
-.profile-info {
-  padding: 10px 16px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
 .profile-info-name {
   margin: 0;
   font-size: 14px;
@@ -390,6 +315,7 @@ function closeMenus() {
 .profile-info-email {
   margin: 2px 0 0;
   font-size: 12px;
+  font-weight: 400;
   color: var(--color-text-subtle);
 }
 
@@ -398,25 +324,11 @@ function closeMenus() {
   align-items: center;
   gap: 8px;
   width: 100%;
-  padding: 8px 16px;
-  font-size: 14px;
   color: #475569;
   text-decoration: none;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-}
-
-.menu-item:hover {
-  background-color: #f8fafc;
 }
 
 .menu-item--danger {
-  color: var(--color-danger);
-}
-
-.menu-item--danger:hover {
-  background-color: var(--color-danger-soft);
+  color: var(--color-danger) !important;
 }
 </style>

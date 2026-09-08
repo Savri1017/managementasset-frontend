@@ -1,6 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   LayoutGrid,
   Box,
@@ -79,17 +81,18 @@ function isActive(to) {
     </div>
 
     <!-- Menu -->
-    <nav class="sidebar-nav">
+    <ScrollArea class="sidebar-nav">
       <div v-for="group in menuGroups" :key="group.label" class="nav-group">
-        <button
+        <Button
           v-if="!collapsed"
-          type="button"
+          variant="ghost"
+          size="sm"
           class="nav-group-toggle"
           @click="toggleGroup(group.label)"
         >
           <span>{{ group.label }}</span>
           <ChevronDown class="chevron" :class="{ 'chevron--closed': !openGroups[group.label] }" />
-        </button>
+        </Button>
 
         <div
           class="nav-list-wrapper"
@@ -97,27 +100,30 @@ function isActive(to) {
         >
           <ul class="nav-list">
             <li v-for="item in group.items" :key="item.to">
-              <router-link
-                :to="item.to"
+              <Button
+                as-child
+                variant="ghost"
                 class="nav-link"
                 :class="{ 'is-active': isActive(item.to) }"
               >
-                <span class="nav-link-indicator" />
-                <component :is="item.icon" class="nav-icon" :size="18" />
-                <span v-if="!collapsed" class="nav-label">{{ item.label }}</span>
-              </router-link>
+                <router-link :to="item.to">
+                  <span class="nav-link-indicator" />
+                  <component :is="item.icon" class="nav-icon" :size="18" />
+                  <span v-if="!collapsed" class="nav-label">{{ item.label }}</span>
+                </router-link>
+              </Button>
             </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </ScrollArea>
 
     <!-- Collapse toggle -->
     <div class="sidebar-footer">
-      <button type="button" class="collapse-btn" @click="emit('toggle')">
+      <Button variant="ghost" class="collapse-btn" @click="emit('toggle')">
         <ChevronsLeft class="collapse-icon" :class="{ 'collapse-icon--rotated': collapsed }" :size="18" />
         <span v-if="!collapsed">Ciutkan menu</span>
-      </button>
+      </Button>
     </div>
   </aside>
 </template>
@@ -191,25 +197,35 @@ function isActive(to) {
 /* Nav */
 .sidebar-nav {
   flex: 1;
-  overflow-y: auto;
   padding: 16px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
 
+.nav-group {
+  margin-bottom: 20px;
+}
+
+.nav-group:last-child {
+  margin-bottom: 0;
+}
+
+/* Button ghost dari shadcn didesain untuk tema terang, jadi warna & hover
+   di sidebar gelap ini di-override manual (perlu !important karena
+   class Tailwind bawaan Button ikut ter-attach di elemen yang sama). */
 .nav-group-toggle {
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 8px 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--color-text-muted);
+  padding: 6px 8px !important;
+  height: auto !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--color-text-muted) !important;
+}
+
+.nav-group-toggle:hover {
+  background-color: transparent !important;
+  color: #ffffff !important;
 }
 
 .chevron {
@@ -244,26 +260,29 @@ function isActive(to) {
 }
 
 .nav-link {
-  position: relative;
-  display: flex;
+  position: relative !important;
+  display: flex !important;
   align-items: center;
+  justify-content: flex-start !important;
   gap: 12px;
-  border-radius: 6px;
-  padding: 8px 10px;
-  font-size: 14px;
-  color: #cbd5e1;
+  width: 100%;
+  height: auto !important;
+  border-radius: 6px !important;
+  padding: 8px 10px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #cbd5e1 !important;
   text-decoration: none;
-  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .nav-link:hover {
-  background-color: var(--color-sidebar-hover);
-  color: #ffffff;
+  background-color: var(--color-sidebar-hover) !important;
+  color: #ffffff !important;
 }
 
 .nav-link.is-active {
-  background-color: var(--color-sidebar-hover);
-  color: #ffffff;
+  background-color: var(--color-sidebar-hover) !important;
+  color: #ffffff !important;
 }
 
 .nav-link-indicator {
@@ -308,23 +327,21 @@ function isActive(to) {
 }
 
 .collapse-btn {
-  display: flex;
+  display: flex !important;
   align-items: center;
+  justify-content: flex-start !important;
   gap: 12px;
   width: 100%;
-  padding: 8px 10px;
-  border-radius: 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-text-subtle);
-  font-size: 14px;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  height: auto !important;
+  padding: 8px 10px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: var(--color-text-subtle) !important;
 }
 
 .collapse-btn:hover {
-  background-color: var(--color-sidebar-hover);
-  color: #ffffff;
+  background-color: var(--color-sidebar-hover) !important;
+  color: #ffffff !important;
 }
 
 .collapse-icon {

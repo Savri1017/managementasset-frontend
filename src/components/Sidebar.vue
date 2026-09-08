@@ -303,7 +303,7 @@ function isActive(to) {
 
 .nav-link:hover .nav-icon,
 .nav-link.is-active .nav-icon {
-  color: var(--color-accent);
+  color: var(--background) !important;
 }
 
 .nav-label {

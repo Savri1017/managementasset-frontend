@@ -1,32 +1,15 @@
 <script setup>
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
+// App.vue sengaja dibuat sangat sederhana: hanya jadi "wadah" router.
+// Halaman login/register tampil polos (tanpa sidebar/navbar),
+// sedangkan halaman admin membungkus dirinya sendiri dengan AdminLayout
+// lewat nested route di router/index.js. Lihat catatan di bawah.
 </script>
 
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-slate-50 p-4">
-    <Card class="w-full max-w-md">
-      <CardHeader>
-        <CardTitle>Management Asset</CardTitle>
-        <CardDescription>Masukkan detail data aset baru di bawah ini.</CardDescription>
-      </CardHeader>
-      <CardContent class="space-y-4">
-        <div>
-          <label class="text-sm font-medium mb-1 block">Nama Aset</label>
-          <Input placeholder="Contoh: Laptop Macbook Pro" />
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button class="w-full">Simpan Data</Button>
-      </CardFooter>
-    </Card>
-  </div>
+  <router-view />
 </template>
+
+<style>
+/* App.vue sengaja tidak punya style scoped:
+   ini adalah root komponen, jadi style global taruh di style.css saja. */
+</style>

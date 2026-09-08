@@ -1,5 +1,6 @@
 /* ==========================================================================
    style.css — Tailwind CSS v4 + shadcn-vue
+   Tema utama: BLUE
    ========================================================================== */
 
 @import "tailwindcss";
@@ -18,9 +19,9 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.21 0.03 256);
 
-  /* Teal accent, kept close to the existing project */
-  --primary: oklch(0.60 0.14 178);
-  --primary-foreground: oklch(0.98 0.01 180);
+  /* Blue utama */
+  --primary: oklch(0.57 0.20 255);
+  --primary-foreground: oklch(0.98 0.01 255);
 
   --secondary: oklch(0.96 0.01 250);
   --secondary-foreground: oklch(0.28 0.03 256);
@@ -28,14 +29,15 @@
   --muted: oklch(0.96 0.01 250);
   --muted-foreground: oklch(0.50 0.04 256);
 
-  --accent: oklch(0.95 0.02 180);
-  --accent-foreground: oklch(0.28 0.03 256);
+  /* Accent juga biru supaya tidak ada nuansa hijau/teal */
+  --accent: oklch(0.95 0.035 255);
+  --accent-foreground: oklch(0.28 0.06 255);
 
   --destructive: oklch(0.59 0.20 15);
 
   --border: oklch(0.90 0.02 250);
   --input: oklch(0.90 0.02 250);
-  --ring: oklch(0.60 0.14 178);
+  --ring: oklch(0.57 0.20 255);
 
   --radius: 0.5rem;
 
@@ -44,11 +46,13 @@
   --color-surface: #ffffff;
   --color-border: #e2e8f0;
 
+  /* Sidebar tetap gelap, aksen dibuat biru */
   --color-sidebar-bg: #0f172a;
-  --color-sidebar-hover: #1e293b;
+  --color-sidebar-hover: #1e3a5f;
 
-  --color-accent: #2dd4bf;
-  --color-accent-soft: rgba(45, 212, 191, 0.12);
+  /* Warna aksen global: BLUE */
+  --color-accent: #2563eb;
+  --color-accent-soft: rgba(37, 99, 235, 0.14);
   --color-danger: #e11d48;
   --color-danger-soft: #fff1f2;
 
@@ -69,7 +73,7 @@
   --popover: oklch(0.20 0.025 256);
   --popover-foreground: oklch(0.97 0.01 250);
 
-  --primary: oklch(0.69 0.13 178);
+  --primary: oklch(0.69 0.18 255);
   --primary-foreground: oklch(0.16 0.02 256);
 
   --secondary: oklch(0.25 0.025 256);
@@ -78,14 +82,18 @@
   --muted: oklch(0.25 0.025 256);
   --muted-foreground: oklch(0.72 0.03 250);
 
-  --accent: oklch(0.27 0.04 180);
+  --accent: oklch(0.27 0.06 255);
   --accent-foreground: oklch(0.97 0.01 250);
 
   --destructive: oklch(0.70 0.18 15);
 
   --border: oklch(0.30 0.025 256);
   --input: oklch(0.30 0.025 256);
-  --ring: oklch(0.69 0.13 178);
+  --ring: oklch(0.69 0.18 255);
+
+  --color-sidebar-hover: #1e3a5f;
+  --color-accent: #60a5fa;
+  --color-accent-soft: rgba(96, 165, 250, 0.16);
 }
 
 @theme inline {

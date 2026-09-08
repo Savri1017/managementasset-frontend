@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Target,
   Network,
+  Zap,
 } from 'lucide-vue-next'
 
 const router = useRouter()
@@ -79,7 +80,7 @@ async function handleLogin() {
             </div>
             <div class="brand-point">
               <div class="point-icon">
-                <Network :size="17" />
+                <Zap :size="17" />
               </div>
               <div>
                 <strong>Efisien</strong>
@@ -387,7 +388,8 @@ async function handleLogin() {
 
 .brand-logo {
   margin-bottom: 30px;
-  width: 9rem;
+  width: 10rem;
+  
 }
 
 .mobile-logo {

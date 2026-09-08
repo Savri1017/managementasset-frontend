@@ -1,7 +1,6 @@
 <template>
   <div class="placeholder-page">
     <h2>Dashboard</h2>
-    <p>Halaman ini masih placeholder — ganti dengan konten aslinya.</p>
   </div>
 </template>
 

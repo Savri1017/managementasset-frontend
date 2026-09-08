@@ -16,6 +16,7 @@ import {
   ChevronDown,
   ChevronsLeft,
   Boxes,
+  Target
 } from 'lucide-vue-next'
 
 const props = defineProps({
@@ -72,10 +73,10 @@ function isActive(to) {
     <!-- Brand -->
     <div class="sidebar-brand">
       <div class="brand-icon">
-        <Boxes :size="20" />
+        <Target :size="20" />
       </div>
       <div v-if="!collapsed" class="brand-text">
-        <p class="brand-title">SIMASET</p>
+        <p class="brand-title">ENERGEEK</p>
         <p class="brand-subtitle">Manajemen Aset Kantor</p>
       </div>
     </div>
@@ -117,14 +118,6 @@ function isActive(to) {
         </div>
       </div>
     </ScrollArea>
-
-    <!-- Collapse toggle -->
-    <div class="sidebar-footer">
-      <Button variant="ghost" class="collapse-btn" @click="emit('toggle')">
-        <ChevronsLeft class="collapse-icon" :class="{ 'collapse-icon--rotated': collapsed }" :size="18" />
-        <span v-if="!collapsed">Ciutkan menu</span>
-      </Button>
-    </div>
   </aside>
 </template>
 
@@ -317,13 +310,6 @@ function isActive(to) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Footer */
-.sidebar-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px;
-  flex-shrink: 0;
 }
 
 .collapse-btn {

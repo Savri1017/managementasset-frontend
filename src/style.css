@@ -1,85 +1,185 @@
 /* ==========================================================================
-   style.css — global styles & design tokens
-   Import file ini sekali saja di main.js
+   style.css — Tailwind CSS v4 + shadcn-vue
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-@tailwind base; 
-@tailwind components; 
-@tailwind utilities;
-
 
 :root {
-  /* Warna dasar */
+  /* shadcn-vue semantic colors */
+  --background: oklch(0.985 0.004 255);
+  --foreground: oklch(0.21 0.03 256);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.03 256);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.03 256);
+
+  /* Teal accent, kept close to the existing project */
+  --primary: oklch(0.60 0.14 178);
+  --primary-foreground: oklch(0.98 0.01 180);
+
+  --secondary: oklch(0.96 0.01 250);
+  --secondary-foreground: oklch(0.28 0.03 256);
+
+  --muted: oklch(0.96 0.01 250);
+  --muted-foreground: oklch(0.50 0.04 256);
+
+  --accent: oklch(0.95 0.02 180);
+  --accent-foreground: oklch(0.28 0.03 256);
+
+  --destructive: oklch(0.59 0.20 15);
+
+  --border: oklch(0.90 0.02 250);
+  --input: oklch(0.90 0.02 250);
+  --ring: oklch(0.60 0.14 178);
+
+  --radius: 0.5rem;
+
+  /* Existing application tokens */
   --color-bg: #f8fafc;
   --color-surface: #ffffff;
   --color-border: #e2e8f0;
 
-  /* Sidebar */
   --color-sidebar-bg: #0f172a;
   --color-sidebar-hover: #1e293b;
 
-  /* Aksen */
   --color-accent: #2dd4bf;
   --color-accent-soft: rgba(45, 212, 191, 0.12);
   --color-danger: #e11d48;
   --color-danger-soft: #fff1f2;
 
-  /* Teks */
   --color-text: #0f172a;
   --color-text-muted: #64748b;
   --color-text-subtle: #94a3b8;
 
-  /* Tipografi */
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.dark {
+  --background: oklch(0.16 0.02 256);
+  --foreground: oklch(0.97 0.01 250);
+
+  --card: oklch(0.20 0.025 256);
+  --card-foreground: oklch(0.97 0.01 250);
+
+  --popover: oklch(0.20 0.025 256);
+  --popover-foreground: oklch(0.97 0.01 250);
+
+  --primary: oklch(0.69 0.13 178);
+  --primary-foreground: oklch(0.16 0.02 256);
+
+  --secondary: oklch(0.25 0.025 256);
+  --secondary-foreground: oklch(0.97 0.01 250);
+
+  --muted: oklch(0.25 0.025 256);
+  --muted-foreground: oklch(0.72 0.03 250);
+
+  --accent: oklch(0.27 0.04 180);
+  --accent-foreground: oklch(0.97 0.01 250);
+
+  --destructive: oklch(0.70 0.18 15);
+
+  --border: oklch(0.30 0.025 256);
+  --input: oklch(0.30 0.025 256);
+  --ring: oklch(0.69 0.13 178);
+}
+
+@theme inline {
+  --font-sans: var(--font-sans);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 }
 
 * {
   box-sizing: border-box;
+  border-color: var(--border);
 }
 
 html,
 body,
 #app {
+  min-height: 100%;
   height: 100%;
 }
 
 body {
   margin: 0;
   font-family: var(--font-sans);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: var(--foreground);
+  background-color: var(--background);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 a {
   color: inherit;
 }
 
-button {
-  font-family: inherit;
+::selection {
+  background: color-mix(in oklab, var(--primary) 22%, transparent);
+  color: var(--foreground);
 }
 
-/* Scrollbar tipis, biar sidebar & dropdown rapi */
+/* Scrollbar tipis */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: rgba(148, 163, 184, 0.4);
   border-radius: 999px;
-}
-
-@theme inline {
-  --font-heading: var(--font-sans);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

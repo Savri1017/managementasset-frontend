@@ -40,12 +40,6 @@ const notifications = ref([
       <Menu :size="20" />
     </Button>
 
-    <!-- Judul halaman -->
-    <div class="page-heading">
-      <h1 class="page-title">{{ pageTitle }}</h1>
-      <p class="page-subtitle">Sistem Manajemen Aset Kantor</p>
-    </div>
-
     <!-- Search -->
     <div class="search-wrap">
       <div class="search-box">
@@ -141,6 +135,8 @@ const notifications = ref([
 .icon-btn {
   position: relative;
   flex-shrink: 0;
+  background-color: rgba(158, 158, 170, 0.229);
+  border-radius: 10px;
   color: var(--color-text-muted) !important;
 }
 
@@ -177,7 +173,7 @@ const notifications = ref([
 /* Search */
 .search-wrap {
   flex: 1;
-  max-width: 420px;
+  max-width: 320px;
   margin-left: 8px;
   display: none;
 }

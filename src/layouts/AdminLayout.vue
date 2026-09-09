@@ -8,7 +8,6 @@ const router = useRouter()
 const collapsed = ref(false)
 
 function handleLogout() {
-  // ganti dengan logic logout kamu (hapus token, panggil API, dll)
   router.push('/login')
 }
 </script>
@@ -21,7 +20,6 @@ function handleLogout() {
       <Navbar :collapsed="collapsed" @toggle-sidebar="collapsed = !collapsed" @logout="handleLogout" />
 
       <main class="admin-main">
-        <!-- Konten tiap halaman dashboard masuk di sini -->
         <router-view />
       </main>
     </div>

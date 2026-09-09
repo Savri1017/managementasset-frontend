@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-  // Halaman login: berdiri sendiri, TANPA AdminLayout (tanpa sidebar/navbar)
   {
     path: '/login',
     name: 'login',
